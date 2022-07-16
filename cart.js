@@ -1,4 +1,4 @@
-const {createStore} = require('redux');
+const {createStore, combineReducers} = require('redux');
 
 const GET_CART_ITEMS = 'GET_CART_ITEMS';
 const ADD_CART_ITEMS = 'ADD_CART_ITEMS';
@@ -54,7 +54,11 @@ const cartReducer = (state = initialState, action) => {
     }
 }
 
-const store = createStore(cartReducer);
+const rootReducer = combineReducers({
+    cartR: cartReducer,
+});
+
+const store = createStore(rootReducer);
 
 store.subscribe(() => {
     console.log('subscribe', store.getState());
